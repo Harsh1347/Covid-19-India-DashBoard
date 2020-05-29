@@ -67,5 +67,3 @@ def covid_map():
         ).add_to(map)
 
     return map
-    map.save('basic_map.html')
-
