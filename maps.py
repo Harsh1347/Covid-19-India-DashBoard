@@ -40,23 +40,11 @@ def covid_map():
     'Haryana': (29.0588,76.0856),
     'Dadar Nagar Haveli': (20.1809,73.0169)}
 
-    # def lat_lon(place):
-    #     geolocator = Nominatim()
-    #     loc = geolocator.geocode(place)
-    #     return (loc.latitude,loc.longitude)
-
     data = get_data()
-    # for i in data['state']:
-    #     try:
-    #         print(i,lat_lon(i))
-    #     except:
-    #         print(i)
-
-    #print(data)
     map = folium.Map(location= (20.5937,78.9629),zoom_start= 4)
-    #data = pd.read_csv('airport_loc.csv')
-    folium.raster_layers.TileLayer('Stamen Terrain').add_to(map)
-    folium.raster_layers.TileLayer('Stamen Toner').add_to(map)
+    #fg = folium.FeatureGroup('india')
+    #fg.add_child(folium.GeoJson(data=(open('indian_states.json','r',encoding='utf-8-sig').read())))
+    #map.add_child(fg)
 
     folium.LayerControl().add_to(map)
 
@@ -65,5 +53,7 @@ def covid_map():
         folium.Marker(location=loc_val[row[0]],
         popup=(row[0]+'\n'+'confirmed cases:'+str(row[3])+'\n'+'Deaths:'+str(row[1])+'\n'+'Cured:'+str(row[2]))
         ).add_to(map)
-
+    #map.save('basic_map.html')
     return map
+    
+
