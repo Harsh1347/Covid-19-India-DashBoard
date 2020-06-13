@@ -26,7 +26,7 @@ data['death'] = data.death.astype('int')
 data['cured'] = data.cured.astype('int')
 data['confirmed_cases'] = data.confirmed_cases.astype('int')
 
-data.loc[35] = ['Total',data.death.sum(), data.cured.sum(), data.confirmed_cases.sum()]
+data.loc[len(data['cured'])] = ['Total',data.death.sum(), data.cured.sum(), data.confirmed_cases.sum()]
 st.title("COVID-19 INDIA ANALAYSIS")
 
 sel = st.sidebar.radio('NAVIGATION',('Home','State Wise Data','Visualization'))
@@ -64,9 +64,12 @@ if sel == 'Visualization':
     l = [i[:-3] for i in l]
     l = [i.replace('-','') for i in l]
     cumsum_today = st.radio('Select an option',('Cumulative','Daily'))
-    dur = st.radio('Select Duration',('All','Last 30 Days','Last 15 Days'))
+    dur = st.radio('Select Duration',('Last 7 Days','Last 15 Days','Last 30 Days','All'))
+    
+    if dur == 'Last 7 Days':
+        t= -7
     if dur == 'All':
-        t=0
+        t= 0
     if dur == 'Last 30 Days':
         t=-30
     if dur == 'Last 15 Days':

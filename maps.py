@@ -49,7 +49,6 @@ def covid_map():
     folium.LayerControl().add_to(map)
 
     for (index,row) in data.iterrows():
-        
         folium.Marker(location=loc_val[row[0]],
         popup=(row[0]+'\n'+'confirmed cases:'+str(row[3])+'\n'+'Deaths:'+str(row[1])+'\n'+'Cured:'+str(row[2]))
         ).add_to(map)
