@@ -1,6 +1,7 @@
 import folium
 import pandas as pd
 from scrape_cloud import get_data  
+from data_helper import state_wise_data,get_states_statecode
 from geopy.geocoders import Nominatim
 
 def covid_map():
@@ -11,9 +12,11 @@ def covid_map():
     'Bihar': (25.6440845, 85.906508),
     'Chandigarh': (30.7194022, 76.7646552),
     'Chhattisgarh': (21.6637359, 81.8406351),
+    'Dadra and Nagar Haveli and Daman and Diu': (20.1809,73.0169),
     'Delhi': (28.6517178, 77.2219388),
     'Goa': (15.3004543, 74.0855134),
     'Gujarat': (22.41540825, 72.03149703699282),
+    'Haryana': (29.0588,76.0856),
     'Himachal Pradesh' :(31.81676015, 77.34932051968858),
     'Jammu and Kashmir': (33.53155445, 75.3109635338607),
     'Jharkhand': (23.4559809, 85.2557301),
@@ -36,11 +39,11 @@ def covid_map():
     'Tripura': (23.7750823, 91.7025091),
     'Uttarakhand': (30.091993549999998, 79.32176659343018),
     'Uttar Pradesh': (27.1303344, 80.859666),
-    'West Bengal': (22.9964948, 87.6855882),
-    'Haryana': (29.0588,76.0856),
-    'Dadar Nagar Haveli': (20.1809,73.0169)}
+    'West Bengal': (22.9964948, 87.6855882)
+    }
 
     data = get_data()
+    print(data)
     map = folium.Map(location= (20.5937,78.9629),zoom_start= 4)
     #fg = folium.FeatureGroup('india')
     #fg.add_child(folium.GeoJson(data=(open('indian_states.json','r',encoding='utf-8-sig').read())))
@@ -55,4 +58,6 @@ def covid_map():
     #map.save('basic_map.html')
     return map
     
-
+a,b,c,d,e,f =state_wise_data()
+d.set_index("Date",inplace = True)
+print(d.transpose().iloc[:,-1])
