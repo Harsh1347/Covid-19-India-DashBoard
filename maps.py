@@ -1,11 +1,15 @@
 import folium
 import pandas as pd
 from scrape_cloud import get_data  
-from data_helper import state_wise_data,get_states_statecode
+from data_helper import state_wise_data,get_states_statecode,state_coding
 from geopy.geocoders import Nominatim
 
+cn,cr,d,ccn,ccr,cd = state_wise_data()
+
+
 def covid_map():
-    loc_val = {'Andaman and Nicobar Islands':(11.7401,92.6586),
+    loc_val = {
+    'Andaman and Nicobar Islands':(11.7401,92.6586),
     'Andhra Pradesh': (15.9240905, 80.1863809),
     'Arunachal Pradesh': (27.6891712, 96.4597226),
     'Assam': (26.4073841, 93.2551303),
@@ -35,7 +39,7 @@ def covid_map():
     'Rajasthan' :(26.8105777, 73.7684549),
     'Sikkim': (27.601029, 88.45413638680145),
     'Tamil Nadu' :(10.9094334, 78.3665347),
-    'Telengana': (17.329125, 78.5822228),
+    'Telangana': (17.329125, 78.5822228),
     'Tripura': (23.7750823, 91.7025091),
     'Uttarakhand': (30.091993549999998, 79.32176659343018),
     'Uttar Pradesh': (27.1303344, 80.859666),
@@ -43,11 +47,8 @@ def covid_map():
     }
 
     data = get_data()
-    print(data)
+    
     map = folium.Map(location= (20.5937,78.9629),zoom_start= 4)
-    #fg = folium.FeatureGroup('india')
-    #fg.add_child(folium.GeoJson(data=(open('indian_states.json','r',encoding='utf-8-sig').read())))
-    #map.add_child(fg)
 
     folium.LayerControl().add_to(map)
 
@@ -55,9 +56,20 @@ def covid_map():
         folium.Marker(location=loc_val[row[0]],
         popup=(row[0]+'\n'+'confirmed cases:'+str(row[3])+'\n'+'Deaths:'+str(row[1])+'\n'+'Cured:'+str(row[2]))
         ).add_to(map)
-    #map.save('basic_map.html')
     return map
     
-a,b,c,d,e,f =state_wise_data()
-d.set_index("Date",inplace = True)
-print(d.transpose().iloc[:,-1])
+# states=sorted(states)
+# states.remove("Total")
+# states.insert(0,'Total')
+# states.append("Unassigned")
+# states,state_codes = get_states_statecode()
+# a,b,c,d,e,f =state_wise_data()
+# d.set_index("Date",inplace = True)
+# e.set_index("Date",inplace = True)
+# f.set_index("Date",inplace = True)
+# dick = {
+#     "a":d.transpose().iloc[:,-1],
+#     "b":e.transpose().iloc[:,-1],
+#     "c":f.transpose().iloc[:,-1],
+# }
+# d2 = pd.DataFrame(dick)

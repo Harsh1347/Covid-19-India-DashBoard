@@ -4,7 +4,6 @@ import pandas as pd
 def get_data():
     client = ScrapinghubClient('2818dd084edb4c36afc5b5460f86b0e6')
     project = client.get_project(441598)
-    #print(project.spiders.list())
     spider = project.spiders.get('state')
     job_id = list(project.activity.iter(count=2))
     job_id = job_id[1]['job']
@@ -23,6 +22,5 @@ def get_data():
     data = {'state':state_name,'death':death,'cured':cured,'confirmed_cases':confirmed_cases}
     data = pd.DataFrame(data)
     data = data[:-1]
-    #data.to_csv('corona_data.csv')
     return data
 
