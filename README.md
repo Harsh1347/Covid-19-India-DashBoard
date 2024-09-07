@@ -6,8 +6,5 @@
 <li>dash.py uses streamlit to create a web app.
 </ul>
 
-The dashboard has been deployed on Heroku : https://india-covid19-dash.herokuapp.com/
-
 ![COVID-19 INDIA DASH BOARD](https://github.com/Harsh1347/Covid-19-India-DashBoard/blob/master/covid-dash.gif)
 
-More functionalities to be added soon
