@@ -5,17 +5,16 @@ from matplotlib import pyplot as plt
 
 
 def state_coding():
-    a = requests.get('https://api.covid19india.org/data.json')
-    a = a.json()
-    a = a['statewise']
+    data_req = requests.get('https://api.covid19india.org/data.json')
+    data_req = data_req.json()
+    state_data = data_req['statewise']
     state_code = {}
-    for i in a:
-        state_code[i['state']] = i['statecode']
+    for state in state_data:
+        state_code[state['state']] = state['statecode']
     return state_code
 
 def state_wise_data():
     state_wise = pd.read_csv("https://api.covid19india.org/csv/latest/state_wise_daily.csv")
-    #print(state_wise)
     cnf_case = state_wise.loc[state_wise['Status']=='Confirmed']
     cured = state_wise.loc[state_wise['Status']=='Recovered']
     death = state_wise.loc[state_wise['Status']=='Deceased']
